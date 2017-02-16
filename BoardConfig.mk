@@ -57,7 +57,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_APPEND_DTB := true
 
 TARGET_KERNEL_SOURCE := kernel/leeco/msm8976
-TARGET_KERNEL_CONFIG := lineage_s2_defconfig
+TARGET_KERNEL_CONFIG := mokee_s2_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
 BOARD_DTBTOOL_ARGS := -2
@@ -180,9 +180,9 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 TARGET_USES_WCNSS_MAC_ADDR_REV := true
 
-# Cyanogen hardware
-BOARD_HARDWARE_CLASS += hardware/cyanogen/cmhw
-BOARD_USES_CYANOGEN_HARDWARE := true
+# MKHW hardware
+BOARD_HARDWARE_CLASS += hardware/mokee/mkhw
+BOARD_USES_MOKEE_HARDWARE := true
 
 # Twrp
 #RECOVERY_VARIANT := twrp

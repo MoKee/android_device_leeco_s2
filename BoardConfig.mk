@@ -183,8 +183,7 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 TARGET_USES_WCNSS_MAC_ADDR_REV := true
 
 # MKHW hardware
-BOARD_HARDWARE_CLASS += hardware/mokee/mkhw
-BOARD_USES_MOKEE_HARDWARE := true
+BOARD_HARDWARE_CLASS += device/leeco/s2/mkhw
 
 # Enable dexpreopt to speed boot time
 ifeq ($(HOST_OS),linux)

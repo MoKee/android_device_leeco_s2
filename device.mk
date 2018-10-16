@@ -24,7 +24,7 @@ $(call inherit-product, vendor/leeco/s2/s2-vendor.mk)
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay-mokee
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
@@ -253,7 +253,7 @@ PRODUCT_PACKAGES += \
 
 # Livedisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-legacymm
+    vendor.mokee.livedisplay@1.0-service-legacymm
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -356,7 +356,7 @@ PRODUCT_PACKAGES += \
 
 # Vendor security patch level
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lineage.build.vendor_security_patch=2016-12-01
+    ro.mk.build.vendor_security_patch=2016-12-01
 
 # VR
 PRODUCT_PACKAGES += \

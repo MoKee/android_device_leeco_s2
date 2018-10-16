@@ -57,7 +57,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 
 TARGET_KERNEL_SOURCE := kernel/leeco/msm8976
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := lineage_s2_defconfig
+TARGET_KERNEL_CONFIG := mokee_s2_defconfig
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -109,7 +109,7 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
 BLINK_PATH := "/sys/class/leds/red/blink"
-WITH_LINEAGE_CHARGER := false
+WITH_MOKEE_CHARGER := false
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.s2
 
 # CNE
@@ -181,8 +181,8 @@ TARGET_PROVIDES_KEYMASTER := true
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Lineage Hardware
-BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/lineagehw
+# MK Hardware
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
 
 # Media
 TARGET_USES_MEDIA_EXTENSIONS := true

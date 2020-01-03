@@ -14,7 +14,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.lineageos.consumerirtransmitter" android:versionCode="1" android:versionName="1.2" android:sharedUserId="android.uid.system">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.mokee.consumerirtransmitter" android:versionCode="1" android:versionName="1.2" android:sharedUserId="android.uid.system">
 
     <uses-sdk android:minSdkVersion="27" />
 

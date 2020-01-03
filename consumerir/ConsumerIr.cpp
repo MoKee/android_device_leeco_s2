@@ -53,7 +53,7 @@ Return<bool> ConsumerIr::transmit(int32_t carrierFreq,
 
     std::stringstream ss;
     ss << "/system/bin/am broadcast -a "
-          "org.lineageos.consumerirtransmitter.TRANSMIT_IR --es carrier_freq "
+          "org.mokee.consumerirtransmitter.TRANSMIT_IR --es carrier_freq "
        << carrierFreq << " --es pattern " << vts.str();
 
     int child = fork();

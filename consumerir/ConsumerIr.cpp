@@ -16,16 +16,13 @@
 
 #define LOG_TAG "ConsumerIrService"
 
-#include <fcntl.h>
+#include "ConsumerIr.h"
 
 #include <android-base/logging.h>
+#include <fcntl.h>
 
-#include "ConsumerIr.h"
 #include <iostream>
 #include <vector>
-
-#include <sys/types.h>
-#include <unistd.h>
 
 namespace android {
 namespace hardware {
@@ -34,46 +31,66 @@ namespace V1_0 {
 namespace implementation {
 
 static hidl_vec<ConsumerIrFreqRange> rangeVec{
-    {.min = 30000, .max = 30000}, {.min = 33000, .max = 33000},
-    {.min = 36000, .max = 36000}, {.min = 38000, .max = 38000},
-    {.min = 40000, .max = 40000}, {.min = 56000, .max = 56000},
+    {.min = 30000, .max = 30000}, {.min = 33000, .max = 33000}, {.min = 36000, .max = 36000},
+    {.min = 38000, .max = 38000}, {.min = 40000, .max = 40000}, {.min = 56000, .max = 56000},
 };
 
-// Methods from ::android::hardware::ir::V1_0::IConsumerIr follow.
-Return<bool> ConsumerIr::transmit(int32_t carrierFreq,
-                                  const hidl_vec<int32_t> &pattern) {
-  if (pattern.size() > 0) {
-    std::ostringstream vts;
-
-    // Convert all but the last element to avoid a trailing ","
-    std::copy(pattern.begin(), pattern.end() - 1,
-              std::ostream_iterator<int32_t>(vts, ","));
-
-    vts << pattern[pattern.size() - 1];
-
-    std::stringstream ss;
-    ss << "/system/bin/am broadcast -a "
-          "org.mokee.consumerirtransmitter.TRANSMIT_IR --es carrier_freq "
-       << carrierFreq << " --es pattern " << vts.str();
-
-    int child = fork();
-    if (child == 0) {
-      execl("/system/bin/sh", "sh", "-c", ss.str().c_str(), (char *)0);
+int ConsumerIr::sendMsg(const char* msg) {
+    int localsocket = -1, len;
+    struct sockaddr_un remote;
+    if ((localsocket = socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
+        LOG(ERROR) << "could not create socket";
+        return -1;
     }
+    char const* name = "org.mokee.consumerirtransmitter.localsocket";
+    remote.sun_path[0] = '\0'; /* abstract namespace */
+    strcpy(remote.sun_path + 1, name);
+    remote.sun_family = AF_UNIX;
+    int nameLen = strlen(name);
+    len = 1 + nameLen + offsetof(struct sockaddr_un, sun_path);
+    if (connect(localsocket, (struct sockaddr*)&remote, len) == -1) {
+        LOG(ERROR) << "connect to local socket server failed, is the server running?";
+        close(localsocket);
+        return -1;
+    } else {
+        LOG(DEBUG) << "connect to local socket server success";
+    }
+    if (send(localsocket, msg, strlen(msg), 0) == -1) {
+        LOG(ERROR) << "send msg to local socket server failed";
+        close(localsocket);
+        return -1;
+    } else {
+        LOG(DEBUG) << "send msg to local socket server success";
+    }
+    close(localsocket);
+    return 0;
+}
 
-    return true;
-  }
-
-  return false;
+// Methods from ::android::hardware::ir::V1_0::IConsumerIr follow.
+Return<bool> ConsumerIr::transmit(int32_t carrierFreq, const hidl_vec<int32_t>& pattern) {
+    if (pattern.size() > 0) {
+        std::ostringstream vts;
+        std::copy(pattern.begin(), pattern.end(), std::ostream_iterator<int32_t>(vts, ","));
+        vts << carrierFreq;
+        std::string msg = vts.str();
+        if (sendMsg(msg.c_str()) < 0) {
+            LOG(ERROR) << "send msg failed";
+            return false;
+        } else {
+            LOG(DEBUG) << "send msg success";
+            return true;
+        }
+    }
+    return false;
 }
 
 Return<void> ConsumerIr::getCarrierFreqs(getCarrierFreqs_cb _hidl_cb) {
-  _hidl_cb(true, rangeVec);
-  return Void();
+    _hidl_cb(true, rangeVec);
+    return Void();
 }
 
-} // namespace implementation
-} // namespace V1_0
-} // namespace ir
-} // namespace hardware
-} // namespace android
+}  // namespace implementation
+}  // namespace V1_0
+}  // namespace ir
+}  // namespace hardware
+}  // namespace android

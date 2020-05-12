@@ -14,10 +14,10 @@
 // limitations under the License.
 
 cc_binary {
-    name: "android.hardware.ir@1.0-service.leeco",
+    name: "android.hardware.ir@1.0-service.leeco_s2",
     relative_install_path: "hw",
     defaults: ["hidl_defaults"],
-    init_rc: ["android.hardware.ir@1.0-service.leeco.rc"],
+    init_rc: ["android.hardware.ir@1.0-service.leeco_s2.rc"],
     srcs: ["service.cpp", "ConsumerIr.cpp"],
     shared_libs: [
         "libbase",
@@ -28,5 +28,4 @@ cc_binary {
         "libutils",
         "android.hardware.ir@1.0",
     ],
-    proprietary: true,
 }

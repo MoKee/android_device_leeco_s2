@@ -22,14 +22,14 @@
 #include "KeyDisabler.h"
 
 namespace vendor {
-namespace lineage {
+namespace mokee {
 namespace touch {
 namespace V1_0 {
 namespace implementation {
 
 const static std::string kControlPath = "/proc/touchpanel/capacitive_keys_enable";
 
-// Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
+// Methods from ::vendor::mokee::touch::V1_0::IKeyDisabler follow.
 Return<bool> KeyDisabler::isEnabled() {
     int value;
 
@@ -57,5 +57,5 @@ Return<bool> KeyDisabler::setEnabled(bool enabled) {
 }  // namespace implementation
 }  // namespace V1_0
 }  // namespace touch
-}  // namespace lineage
+}  // namespace mokee
 }  // namespace vendor

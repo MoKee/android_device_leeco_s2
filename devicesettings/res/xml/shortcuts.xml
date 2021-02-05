@@ -11,8 +11,8 @@
 
         <intent
             android:action="om.android.settings.action.IA_SETTINGS"
-            android:targetPackage="org.lineageos.settings.device"
-            android:targetClass="org.lineageos.settings.device.LeecoPreferenceActivity" />
+            android:targetPackage="org.mokee.settings.device"
+            android:targetClass="org.mokee.settings.device.LeecoPreferenceActivity" />
         <categories android:name="android.shortcut.conversation"/>
     </shortcut>
 

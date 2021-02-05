@@ -1,0 +1,10 @@
+[
+  {
+    "repository": "android_vendor_leeco_s2",
+    "target_path": "vendor/leeco/s2"
+  },
+  {
+    "repository": "android_kernel_leeco_msm8976",
+    "target_path": "kernel/leeco/msm8976"
+  }
+]

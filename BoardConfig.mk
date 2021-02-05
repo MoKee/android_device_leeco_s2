@@ -55,7 +55,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x00000100
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/leeco/msm8976
-TARGET_KERNEL_CONFIG := lineage_s2_defconfig
+TARGET_KERNEL_CONFIG := mokee_s2_defconfig
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -109,7 +109,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_HEALTHD_CUSTOM_CHARGER_RES := $(DEVICE_PATH)/charger/images
 BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
 BLINK_PATH := "/sys/class/leds/red/blink"
-WITH_LINEAGE_CHARGER := false
+WITH_MOKEE_CHARGER := false
 
 # CSVT
 TARGET_USES_CSVT := true

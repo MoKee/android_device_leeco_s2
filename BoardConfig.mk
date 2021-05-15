@@ -152,10 +152,9 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # GPS
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
+LOC_HIDL_VERSION := 3.0
 USE_DEVICE_SPECIFIC_GPS := true
-USE_DEVICE_SPECIFIC_LOC_API := true
-TARGET_NO_RPC := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
@@ -214,7 +213,7 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 TARGET_LD_SHIM_LIBS := \
    /vendor/bin/mm-qcamera-daemon|libshims_camera.so \
    /system/lib64/hw/gxfingerprint.default.so|fakelogprint.so \
-   /system/lib64/hw/fingerprint.vendor.msm8952.so|fakelogprint.so \
+   /system/lib64/hw/fingerprint.default.so|fakelogprint.so \
    /system/bin/gx_fpd|fakelogprint.so
 
 # Wifi
